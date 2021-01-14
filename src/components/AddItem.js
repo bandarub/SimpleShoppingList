@@ -41,16 +41,12 @@ class AddItem extends Component {
     }
     this.setState({ error });
   }
-  onItemAdd = () => {
+  onItemAdd = (item) => {
     if (this.formInvalid()) {
       return;
     }
     const { onItemAdd } = this.props;
-    const { name, quantity } = this.state;
-    onItemAdd({
-      name,
-      quantity,
-    });
+    onItemAdd(item);
     this.setState({ name: "", quantity: null });
   };
   render() {
@@ -92,7 +88,10 @@ class AddItem extends Component {
             </div>
           );
         })}
-        <button onClick={this.onItemAdd} >addItem</button>
+        <button onClick={()=>this.onItemAdd({
+      name,
+      quantity,
+    })} >addItem</button>
        
       </div>
     );

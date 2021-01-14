@@ -1,7 +1,9 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 
 import AddItem from "../../components/AddItem";
+import { DAFAULT_ARRAY_LENGTH } from "../../constants";
+import ShoppingList from "../../components/ShoppingList";
 
 let wrapper;
 let state;
@@ -44,16 +46,20 @@ describe("AddItem", () => {
     const inputName = wrapper.find("Input[name='name']");
     const inputQuantity = wrapper.find("Input[name='quantity']");
     inputName.simulate("change", { target: { value: 123, name: "name" } });
-    inputQuantity.simulate("change", { target: { value: 1, name: "quantity" } });
+    inputQuantity.simulate("change", {
+      target: { value: 1, name: "quantity" },
+    });
     wrapper.find("button").simulate("click");
-    expect(wrapper.find(".error")).toHaveLength(1);  
+    expect(wrapper.find(".error")).toHaveLength(1);
   });
   it("should have error if quantity is not number", () => {
     const inputName = wrapper.find("Input[name='name']");
     const inputQuantity = wrapper.find("Input[name='quantity']");
     inputName.simulate("change", { target: { value: "test", name: "name" } });
-    inputQuantity.simulate("change", { target: { value: test, name: "quantity" } });
+    inputQuantity.simulate("change", {
+      target: { value: test, name: "quantity" },
+    });
     wrapper.find("button").simulate("click");
-    expect(wrapper.find(".error")).toHaveLength(1);  
+    expect(wrapper.find(".error")).toHaveLength(1);
   });
 });

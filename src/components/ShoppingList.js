@@ -72,8 +72,7 @@ class ShoppingList extends Component {
     const { name, value } = e.target;
     this.runValidation(name,value,item)
   };
-  onItemRemove = (e, item) => {
-    e.preventDefault();
+  onItemRemove = ( item) => {
     const { listToDisplay } = this.state;
     this.setState({
       listToDisplay: listToDisplay.filter(
@@ -94,7 +93,6 @@ class ShoppingList extends Component {
     if (!listToDisplay || listToDisplay.length === 0) {
       return null;
     }
-    console.log("listToDisplay",listToDisplay)
     return (
       <div className="shoppingList">
         {listToDisplay.map((item, key) => {
@@ -143,10 +141,10 @@ class ShoppingList extends Component {
                   </>
                 );
               })}
-
               <Button
                 title="Remove"
-                onClick={(e) => this.onItemRemove(e, item)}
+                onClick={() => this.onItemRemove(item)}
+                id={key}
               />
             </div>
           );
