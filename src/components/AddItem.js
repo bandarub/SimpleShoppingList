@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Input from "../sharedComponents/Input";
+import Button from "../sharedComponents/Button";
+
 import { validateName, validateQuantity } from "../validator";
 class AddItem extends Component {
   constructor(props) {
@@ -8,6 +10,7 @@ class AddItem extends Component {
       name: "",
       quantity: null,
       error: [],
+      addedItem: null,
     };
   }
   onFieldChange = (e) => {
@@ -23,14 +26,14 @@ class AddItem extends Component {
     const quantityValidation = validateQuantity(parseInt(quantity));
     if (nameValidation) {
       error.push(nameValidation);
-    } 
+    }
     if (quantityValidation) {
       error.push(quantityValidation);
     }
     this.setState({ error });
     return error.length !== 0;
   };
-  onValidate = ()=>{
+  onValidate = () => {
     const { name, quantity, error } = this.state;
     const nameValidation = validateName(name);
     const quantityValidation = validateQuantity(parseInt(quantity));
@@ -40,14 +43,25 @@ class AddItem extends Component {
       error.push(quantityValidation);
     }
     this.setState({ error });
-  }
-  onItemAdd = (item) => {
+  };
+  onItemAdd = () => {
     if (this.formInvalid()) {
       return;
     }
     const { onItemAdd } = this.props;
-    onItemAdd(item);
-    this.setState({ name: "", quantity: null });
+    const { name, quantity } = this.state;
+    const item = {
+      name,
+      quantity,
+    };
+    this.setState({
+      name: "",
+      quantity: null,
+      error: [],
+      addedItem: item,
+    });
+   //onItemAdd(item);
+
   };
   render() {
     const { name, quantity, error } = this.state;
@@ -56,13 +70,13 @@ class AddItem extends Component {
         name: "name",
         value: name,
         type: "text",
-        placeholder:"Enter name"
+        placeholder: "Enter name",
       },
       {
         name: "quantity",
         value: quantity,
         type: "number",
-        placeholder:'Enter quantity'
+        placeholder: "Enter quantity",
       },
     ];
     return (
@@ -88,11 +102,7 @@ class AddItem extends Component {
             </div>
           );
         })}
-        <button onClick={()=>this.onItemAdd({
-      name,
-      quantity,
-    })} >addItem</button>
-       
+        <Button title="Add item" onClick={this.onItemAdd} id="addItem" />
       </div>
     );
   }

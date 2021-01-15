@@ -1,7 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { DAFAULT_ARRAY_LENGTH } from "../../constants";
-import AddItem from "../../components/AddItem";
 import shoppingList from "../../assets/data.json";
 
 import ShoppingList from "../../components/ShoppingList";
@@ -37,25 +36,5 @@ describe("ShoppingList", () => {
     const updatedState = wrapper.state();
     expect(updatedState.listToDisplay.length).toEqual(listToDisplay.length - 1);
   });
-  it("add function should work", () => {
-    const addItemWrapper = shallow(<AddItem />);
-    const listToDisplay = shoppingList;
-    wrapper.setState({ listToDisplay });
-    const item = {
-      name: "test",
-      quantity: 10,
-    };
-    const button = addItemWrapper.find("button");
-    button.simulate("click", {
-      item,
-    });
-    wrapper.setState({
-      listToDisplay: [
-        ...listToDisplay,
-        { ...item, id: listToDisplay.length + 1 },
-      ],
-    });
-    const updatedState = wrapper.state();
-    expect(updatedState.listToDisplay.length).toEqual(listToDisplay.length + 1);
-  });
+
 });

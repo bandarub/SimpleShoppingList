@@ -30,7 +30,7 @@ class ShoppingList extends Component {
       (listItem) => listItem.id === item.id
     );
     if (value) {
-      this.runValidation(name,value,item)
+      this.runValidation(name, value, item);
       if (name === fieldTypes.name) {
         listToDisplay[index]["error"] = {
           ...listToDisplay[index]["error"],
@@ -46,7 +46,7 @@ class ShoppingList extends Component {
     listToDisplay[index][name] = value;
     this.setState({ listToDisplay });
   };
-  runValidation = (name,value,item) =>{
+  runValidation = (name, value, item) => {
     const { listToDisplay } = this.state;
     let nameValidation = null;
     let quantityValidation = null;
@@ -58,7 +58,7 @@ class ShoppingList extends Component {
       listToDisplay[index]["error"] = {
         ...listToDisplay[index]["error"],
         nameError: nameValidation,
-      }
+      };
     } else if (name === fieldTypes.quantity) {
       quantityValidation = validateQuantity(parseInt(value));
       listToDisplay[index]["error"] = {
@@ -67,12 +67,12 @@ class ShoppingList extends Component {
       };
     }
     this.setState({ listToDisplay });
-  }
+  };
   onFieldBlur = (e, item) => {
     const { name, value } = e.target;
-    this.runValidation(name,value,item)
+    this.runValidation(name, value, item);
   };
-  onItemRemove = ( item) => {
+  onItemRemove = (item) => {
     const { listToDisplay } = this.state;
     this.setState({
       listToDisplay: listToDisplay.filter(
@@ -81,12 +81,60 @@ class ShoppingList extends Component {
     });
   };
   onItemAdd = (item) => {
-    const {listToDisplay}=this.state
-    const length = listToDisplay.length
-    this.setState({listToDisplay:listToDisplay.concat({
-      ...item,
-      id:length+1
-    })})
+    const { listToDisplay } = this.state;
+    const length = listToDisplay.length;
+    this.setState({
+      listToDisplay: listToDisplay.concat({
+        ...item,
+        id: length + 1,
+      }),
+    });
+  };
+  renderAddContainer = () => {};
+  getFields = (item) => {
+    return [
+      {
+        name: fieldTypes.name,
+        value: item.name,
+        type: "text",
+        error: item.error,
+        placeholder: "Enter name",
+      },
+      {
+        name: fieldTypes.quantity,
+        value: item.quantity,
+        type: "number",
+        error: item.error,
+        placeholder: "Enter quantity",
+      },
+    ];
+  };
+  renderItemFields = (fields, item) => {
+    return fields.map((fieldItem, index) => {
+      console.log("fieldItem", fieldItem);
+      let errorObj = null;
+      if (fieldItem.error) {
+        if (fieldItem.name === fieldTypes.name) {
+          errorObj = fieldItem.error.nameError;
+        } else if (fieldItem.name === fieldTypes.quantity) {
+          errorObj = fieldItem.error.quantityError;
+        }
+      }
+      return (
+        <>
+          <Input
+            name={fieldItem.name}
+            value={fieldItem.value}
+            key={index}
+            type={fieldItem.type}
+            item={item}
+            onChange={this.onFieldChange}
+            handleBlurInput={this.onFieldBlur}
+          />
+          <span className="error">{errorObj ? errorObj.error : null}</span>
+        </>
+      );
+    });
   };
   render() {
     const { listToDisplay } = this.state;
@@ -96,51 +144,10 @@ class ShoppingList extends Component {
     return (
       <div className="shoppingList">
         {listToDisplay.map((item, key) => {
-          const fields = [
-            {
-              name: fieldTypes.name,
-              value: item.name,
-              type: "text",
-              error: item.error,
-              placeholder:'Enter name'
-            },
-            {
-              name: fieldTypes.quantity,
-              value: item.quantity,
-              type: "number",
-              error: item.error,
-              placeholder:'Enter quantity'
-            },
-          ];
+          const fields = this.getFields(item);
           return (
             <div className="shoppingList__item" key={key}>
-              {fields.map((fieldItem, index) => {
-                console.log("fieldItem", fieldItem);
-                let errorObj = null;
-                if (fieldItem.error) {
-                  if (fieldItem.name === fieldTypes.name) {
-                    errorObj = fieldItem.error.nameError;
-                  } else if (fieldItem.name === fieldTypes.quantity) {
-                    errorObj = fieldItem.error.quantityError;
-                  }
-                }
-                return (
-                  <>
-                    <Input
-                      name={fieldItem.name}
-                      value={fieldItem.value}
-                      key={index}
-                      type={fieldItem.type}
-                      item={item}
-                      onChange={this.onFieldChange}
-                      handleBlurInput={this.onFieldBlur}
-                    />
-                    <span className="error">
-                      {errorObj ? errorObj.error : null}
-                    </span>
-                  </>
-                );
-              })}
+              {this.renderItemFields(fields, item)}
               <Button
                 title="Remove"
                 onClick={() => this.onItemRemove(item)}
@@ -154,5 +161,4 @@ class ShoppingList extends Component {
     );
   }
 }
-
 export default ShoppingList;
