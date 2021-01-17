@@ -133,6 +133,7 @@ class ShoppingList extends Component {
             onChange={this.onFieldChange}
             handleBlurInput={this.onFieldBlur}
             errorObj={errorObj}
+            placeholder={fieldItem.placeholder}
           />
       );
     });
