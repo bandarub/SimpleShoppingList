@@ -80,7 +80,7 @@ class AddItem extends Component {
     ];
     return (
       <div className="addItem">
-        <h2 className="addItem__header">Things to buy</h2>
+        <h2 className="addItem__header">Add new Item</h2>
         <div className="addItem__fields">
           {fields.map((item, key) => {
             const errorObj = error.find(

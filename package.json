@@ -2,6 +2,7 @@
   "name": "shoppinglist_leaddesk",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://bandarub.github.io/SimpleShoppingList/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -9,6 +10,7 @@
     "babel-jest": "^26.6.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
+    "gh-pages": "^3.1.0",
     "jest": "^26.6.3",
     "jest-enzyme": "^7.1.2",
     "node-sass": "^4.11.0",
@@ -22,7 +24,9 @@
     "setup": "yarn install",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
