@@ -35,6 +35,7 @@ describe("ShoppingList", () => {
     });
     const updatedState = wrapper.state();
     expect(updatedState.listToDisplay.length).toEqual(listToDisplay.length - 1);
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
   });
 
 });

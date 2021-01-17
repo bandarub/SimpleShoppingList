@@ -1,0 +1,42 @@
+.shoppingList {
+  padding: 5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2rem;
+  &__header {
+    color: $red;
+    font-size: $big-font-size;
+    width: 100%;
+    border-bottom: 2px solid $red;
+    text-align: center;
+    padding: 2rem 0;
+  }
+  &__list {
+    margin: 2rem;
+    padding-right: 2rem;
+    width: 100%;
+    max-height: 50rem;
+    overflow: auto;
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      position: relative;
+      .field{
+          margin:1.25rem 0;
+          position: relative;
+      }
+      .error {
+          position: absolute;
+        font-size: $normal-font-size;
+      }
+      .button {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+}

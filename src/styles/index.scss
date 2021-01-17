@@ -1,1 +1,12 @@
+@import './variables';
+@import './mixins';
+@import './typography';
+
 @import "./Components/header";
+@import "./Components/shoppingList";
+@import "./Components/addItem";
+
+
+// shared components
+@import "./SharedComponents/input";
+@import "./SharedComponents/button";

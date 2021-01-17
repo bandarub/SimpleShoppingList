@@ -1,4 +1,16 @@
 .header{
-    color:red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $red;
+    padding:2rem;
+    box-shadow:$box-shadow-bottom-default;
+    &__label{
+        font-size: $big-heading-size;
+        color: $bisque;
+    }
+    &__logo{
+        max-width: 5rem;
+    }
 }
 

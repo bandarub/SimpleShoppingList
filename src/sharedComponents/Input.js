@@ -24,7 +24,7 @@ class Input extends React.Component {
   render() {
     const {
       type,
-      label,
+      errorObj,
       disabled,
       autoFocus,
       value,
@@ -46,20 +46,23 @@ class Input extends React.Component {
     }
 
     return (
-      <input
-        type={type ? type : "text"}
-        name={name}
-        value={value ? value : ""}
-        placeholder={placeholder}
-        onChange={this._onChange}
-        disabled={disabled}
-        ref={reference}
-        id={id}
-        {...inputProps}
-        onFocus={this.handleFocusInput}
-        onBlur={this.handleBlurInput}
-        autoFocus={autoFocus}
-      />
+      <div className={inputClass.join(" ")}>
+        <input
+          type={type ? type : "text"}
+          name={name}
+          value={value ? value : ""}
+          placeholder={placeholder}
+          onChange={this._onChange}
+          disabled={disabled}
+          ref={reference}
+          id={id}
+          {...inputProps}
+          onFocus={this.handleFocusInput}
+          onBlur={this.handleBlurInput}
+          autoFocus={autoFocus}
+        />
+        {errorObj ? <span className="error">{errorObj.error}</span> : null}
+      </div>
     );
   }
 }

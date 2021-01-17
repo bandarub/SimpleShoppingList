@@ -16,7 +16,7 @@ export const validateQuantity = (value) =>{
     if(!/^\d+$/.test(value)){
         return {
             name:'quantity',
-            error: value? 'Quantity must be number':'quantity cannot be empty'
+            error: value || isNaN(value)? 'Quantity must be number':'quantity cannot be empty'
         }
     }
 }

@@ -72,5 +72,7 @@ describe("AddItem", () => {
     button.simulate("click");
     const updatedState = wrapper.state();
     expect(updatedState.addedItem).toEqual(item);
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+
   });
 });

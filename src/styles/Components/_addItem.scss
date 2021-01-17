@@ -1,0 +1,26 @@
+.addItem{
+    width: 100%;
+    margin:2rem 0;
+    &__header {
+    color: $red;
+    font-size: $big-font-size;
+    width: 100%;
+    border-bottom: 2px solid $red;
+    text-align: center;
+    padding: 2rem 0;
+  }
+  &__fields{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding:2rem;
+    &-item{
+        position: relative;
+        .error{
+            position: absolute;
+            font-size:1.6rem;
+        }
+    }
+}
+}

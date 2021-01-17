@@ -74,11 +74,13 @@ class ShoppingList extends Component {
   };
   onItemRemove = (item) => {
     const { listToDisplay } = this.state;
+    const filterList = listToDisplay.filter(
+      (listItem) => listItem.id !== item.id
+    )
     this.setState({
-      listToDisplay: listToDisplay.filter(
-        (listItem) => listItem.id !== item.id
-      ),
-    });
+      listToDisplay: filterList
+    })
+    alert("Item removed successfully....");
   };
   onItemAdd = (item) => {
     const { listToDisplay } = this.state;
@@ -89,6 +91,7 @@ class ShoppingList extends Component {
         id: length + 1,
       }),
     });
+    alert("Item added successfully....");
   };
   renderAddContainer = () => {};
   getFields = (item) => {
@@ -111,7 +114,6 @@ class ShoppingList extends Component {
   };
   renderItemFields = (fields, item) => {
     return fields.map((fieldItem, index) => {
-      console.log("fieldItem", fieldItem);
       let errorObj = null;
       if (fieldItem.error) {
         if (fieldItem.name === fieldTypes.name) {
@@ -121,18 +123,17 @@ class ShoppingList extends Component {
         }
       }
       return (
-        <>
           <Input
             name={fieldItem.name}
             value={fieldItem.value}
             key={index}
             type={fieldItem.type}
             item={item}
+            className="field"
             onChange={this.onFieldChange}
             handleBlurInput={this.onFieldBlur}
+            errorObj={errorObj}
           />
-          <span className="error">{errorObj ? errorObj.error : null}</span>
-        </>
       );
     });
   };
@@ -143,19 +144,23 @@ class ShoppingList extends Component {
     }
     return (
       <div className="shoppingList">
-        {listToDisplay.map((item, key) => {
-          const fields = this.getFields(item);
-          return (
-            <div className="shoppingList__item" key={key}>
-              {this.renderItemFields(fields, item)}
-              <Button
-                title="Remove"
-                onClick={() => this.onItemRemove(item)}
-                id={key}
-              />
-            </div>
-          );
-        })}
+        <h2 className="shoppingList__header">Things to buy</h2>
+        <div className="shoppingList__list">
+          {listToDisplay.map((item, key) => {
+            const fields = this.getFields(item);
+            return (
+              <div className="shoppingList__list-item" key={key}>
+                {this.renderItemFields(fields, item)}
+                <Button
+                  title="Remove"
+                  onClick={() => this.onItemRemove(item)}
+                  id={key}
+                />
+              </div>
+            );
+          })}
+        </div>
+
         <AddItem list={listToDisplay} onItemAdd={this.onItemAdd} />
       </div>
     );

@@ -23,16 +23,19 @@ describe("Input", () => {
   it("should render placeholder", () => {
     const placeholder_text = "type anything here";
     const wrapper = shallow(<Input placeholder={placeholder_text} />);
-    expect(wrapper.props().placeholder).toEqual(placeholder_text);
+    const input = wrapper.find('input');
+   expect(input.props().placeholder).toEqual(placeholder_text);
   });
   it("should render correct type", () => {
     const type = "number";
     const wrapper = shallow(<Input type={type} />);
-    expect(wrapper.props().type).toEqual(type);
+    const input = wrapper.find('input');
+   expect(input.props().type).toEqual(type);
   });
   it("should render value", () => {
     const value = "oranges";
     const wrapper = shallow(<Input value={value} />);
-    expect(wrapper.props().value).toEqual(value);
+    const input = wrapper.find('input');
+   expect(input.props().value).toEqual(value);
   });
 });

@@ -1,0 +1,30 @@
+input {
+  font-weight: $font-weight-normal;
+  font-size: 3rem;
+  @include breakpoint(tab-land) {
+    font-size: $big-font-size;
+  }
+  margin: 1rem;
+  width:90%;
+  outline: none;
+  padding: 1em;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid $gray;
+  @include breakpoint(tab-land) {
+		width: 20rem;
+	}
+  &:focus {
+    list-style-type: none;
+    border-color: $gray;
+    border-style: none;
+    transition: $transition-default;
+    border-bottom: 2px solid $black;
+  }
+  &:placeholder {
+    color: $gray;
+  }
+  &:disabled {
+    background-color: $light-gray;
+  }
+}

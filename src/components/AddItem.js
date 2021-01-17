@@ -60,8 +60,7 @@ class AddItem extends Component {
       error: [],
       addedItem: item,
     });
-   //onItemAdd(item);
-
+    onItemAdd(item);
   };
   render() {
     const { name, quantity, error } = this.state;
@@ -81,28 +80,30 @@ class AddItem extends Component {
     ];
     return (
       <div className="addItem">
-        {fields.map((item, key) => {
-          const errorObj = error.find(
-            (errorItem) => errorItem.name === item.name
-          );
-
-          return (
-            <div className="addItem-item" key={key}>
-              <Input
-                name={item.name}
-                value={item.value}
-                type={item.type}
-                key={key}
-                onChange={this.onFieldChange}
-                handleBlurInput={this.formInvalid}
-              />
-              {errorObj ? (
-                <span className="error">{errorObj.error}</span>
-              ) : null}
-            </div>
-          );
-        })}
-        <Button title="Add item" onClick={this.onItemAdd} id="addItem" />
+        <h2 className="addItem__header">Things to buy</h2>
+        <div className="addItem__fields">
+          {fields.map((item, key) => {
+            const errorObj = error.find(
+              (errorItem) => errorItem.name === item.name
+            );
+            return (
+              <div className="addItem__fields-item" key={key}>
+                <Input
+                  name={item.name}
+                  value={item.value}
+                  type={item.type}
+                  key={key}
+                  onChange={this.onFieldChange}
+                  placeholder={item.placeholder}
+                />
+                {errorObj ? (
+                  <span className="error">{errorObj.error}</span>
+                ) : null}
+              </div>
+            );
+          })}
+          <Button title="Add item" onClick={this.onItemAdd} id="addItem" />
+        </div>
       </div>
     );
   }
