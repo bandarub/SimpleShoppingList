@@ -19,7 +19,10 @@ class ShoppingList extends Component {
     const listToDisplay = [];
     for (let i = 1; i <= DAFAULT_ARRAY_LENGTH; i++) {
       const randomIndex = Math.floor(Math.random() * shoppingList.length);
-      listToDisplay.push(shoppingList[randomIndex]);
+      const found = listToDisplay.find(item=>item.id===shoppingList[randomIndex].id)
+      if(!found){
+        listToDisplay.push(shoppingList[randomIndex]);
+      }
     }
     this.setState({ listToDisplay });
   }

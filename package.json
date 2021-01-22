@@ -20,7 +20,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "yarn run dev",
+    "start": "react-scripts start",
     "setup": "yarn install",
     "build": "react-scripts build",
     "test": "react-scripts test",
